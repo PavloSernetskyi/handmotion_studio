@@ -1,0 +1,61 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+env/
+venv/
+
+# PyCharm
+.idea/
+
+# VSCode (if ever used)
+.vscode/
+
+# MacOS / Windows system files
+.DS_Store
+Thumbs.db
+
+# Log / temp files
+*.log
+*.tmp
+
+# Python environment files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local app data or test outputs
+*.sqlite3
+*.db
+*.data
+
+# Coverage / testing
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.cache
+.pytest_cache/
+
+# Streamlit cache
+.streamlit/
+
+# Project builds
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environment configuration
+.env
+.env.*
+
+# Requirements lock file (optional)
+poetry.lock
+Pipfile.lock
