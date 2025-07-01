@@ -1,13 +1,14 @@
 import cv2
 
 class VirtualObject:
-    def __init__(self, x, y, width, height, color=(255, 0, 0)):
+    def __init__(self, x, y, width, height, color=(255, 0, 0), type="generic"):
         self.x = x
         self.y = y
         self.w = width
         self.h = height
         self.color = color
         self.is_selected = False
+        self.type = type  # e.g., 'beer', 'basketball', 'cube'
 
     def draw(self, frame):
         color = (0, 255, 0) if self.is_selected else self.color

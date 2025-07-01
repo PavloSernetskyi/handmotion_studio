@@ -8,9 +8,13 @@ def main():
     tracker = HandTracker()
     recognizer = GestureRecognizer()
 
-    # Step 5: Create interactive object and drag flag,
-    obj = VirtualObject(200, 200, 100, 100)  # Starting position and size
-    dragging = False
+    # Multiple virtual objects with different positions/colors
+    objects = [
+        VirtualObject(100, 150, 100, 100, (255, 0, 0), "beer"),  # Beer
+        VirtualObject(300, 150, 100, 100, (0, 255, 0), "basketball"),
+        VirtualObject(200, 350, 100, 100, (0, 0, 255), "cube")
+    ]
+    dragging_obj = None
 
     while True:
         ret, frame = cap.read()
@@ -25,20 +29,24 @@ def main():
             index_tip = landmarks[0][8]
             cv2.circle(frame, index_tip, 12, (0, 255, 255), -1)
 
-            # Interactions
-            if obj.contains(index_tip):
-                if gesture == "grab":
-                    dragging = True
-                    obj.is_selected = True
-                elif gesture == "open":
-                    dragging = False
-                    obj.is_selected = False
+            # Interaction: Check all objects
+            for obj in objects:
+                if obj.contains(index_tip):
+                    if gesture == "grab":
+                        dragging_obj = obj
+                        obj.is_selected = True
+                    elif gesture == "open":
+                        if dragging_obj == obj:
+                            dragging_obj = None
+                        obj.is_selected = False
 
-            if dragging:
-                obj.move_to(*index_tip)
+            # Move selected object
+            if dragging_obj:
+                dragging_obj.move_to(*index_tip)
 
-        # Draw the object
-        obj.draw(frame)
+        # Draw all objects
+        for obj in objects:
+            obj.draw(frame)
 
         if gesture:
             cv2.putText(frame, f"Gesture: {gesture}", (10, 30),
