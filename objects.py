@@ -9,10 +9,20 @@ class VirtualObject:
         self.color = color
         self.is_selected = False
         self.type = type  # e.g., 'beer', 'basketball', 'cube'
+        self.drinking = False  # Only applies if type == "beer"
 
     def draw(self, frame):
         color = (0, 255, 0) if self.is_selected else self.color
         cv2.rectangle(frame, (self.x, self.y), (self.x + self.w, self.y + self.h), color, -1)
+
+        # Add label
+        label = self.type
+        cv2.putText(frame, label, (self.x + 5, self.y - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+
+        if self.type == "beer" and self.drinking:
+            cv2.putText(frame, "🍺 Opening beer and drinking...", (self.x, self.y + self.h + 30),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
     def contains(self, point):
         px, py = point
