@@ -1,7 +1,25 @@
 from objects import VirtualObject
 import cv2
+import math
 from hand_tracker import HandTracker
 from gesture_recognizer import GestureRecognizer
+
+def distance(pt1, pt2):
+    return math.sqrt((pt1[0] - pt2[0])**2 + (pt1[1] - pt2[1])**2)
+
+def is_duplicate_hand(hand1, hand2):
+    if not hand1 or not hand2 or len(hand1) != len(hand2):
+        return False
+
+    close_points = 0
+    for i in range(len(hand1)):
+        dx = hand1[i][0] - hand2[i][0]
+        dy = hand1[i][1] - hand2[i][1]
+        dist = (dx ** 2 + dy ** 2) ** 0.5
+        if dist < 10:
+            close_points += 1
+
+    return close_points > 0.95 * len(hand1)
 
 def main():
     cap = cv2.VideoCapture(0)
@@ -49,11 +67,16 @@ def main():
 
                 # 🍺 Trigger drinking if hand 0 grabs and hand 1 pinches
                 if obj.type == "beer" and obj.contains(index_tip):
-                    if len(gestures) >= 2:
-                        if gestures[0] == "grab" and gestures[1] == "pinch":
-                            obj.drinking = True
-                        elif gestures[0] == "open" or gestures[1] == "open":
-                            obj.drinking = False
+                    if len(landmarks) >= 2 and len(gestures) >= 2:
+                        if not is_duplicate_hand(landmarks[0], landmarks[1]):
+                            if dragging_obj == obj and gestures[0] == "grab" and gestures[1] == "pinch":
+                                obj.drinking = True
+                            elif gestures[0] == "open" or gestures[1] == "open":
+                                obj.drinking = False
+                        else:
+                            obj.drinking = False  # 👋 One hand counted twice — cancel
+                    else:
+                        obj.drinking = False  # Not enough hands
 
             # Move selected object with index finger tip
             if dragging_obj:
