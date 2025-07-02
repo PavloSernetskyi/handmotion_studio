@@ -40,7 +40,7 @@ class GestureRecognizer:
                 is_curled(pinky_tip, pinky_base)
             ])
 
-            print(f"Curled fingers: {curled_fingers}")
+            # print(f"Curled fingers: {curled_fingers}")
 
             # ✊ Grab
             if curled_fingers >= 2:
