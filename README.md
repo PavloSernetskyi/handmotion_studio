@@ -3,7 +3,12 @@
 HandMotion Studio is an interactive AR/VR desktop application built with Python and OpenCV that enables real-time hand gesture-based interaction with virtual games and objects using a webcam. The current version includes a **Ping Pong game** and a **Playground mode** featuring 3D objects like a cube, basketball, and beer can.
 
 ---
+##  Screenshots
 
+>  Screenshots of gameplay and gesture controls to show off project visually:
+
+
+---
 ##  Folder Structure
 
 ```
@@ -96,21 +101,6 @@ Make sure your webcam is connected, then run:
 ```bash
 python app.py
 ```
-
----
-
-## Add Your Own Games
-
-Add new Python files in the `games/` folder with a function:
-
-```python
-def run_my_game(frame, landmarks, gestures, state):
-    # Handle game logic, rendering, and return updated mode ("my_game" or "menu")
-    return "my_game"
-```
-
-Then modify `app.py` to import and call your game just like `run_pingpong`.
-
 ---
 
 ##  Skills Demonstrated
@@ -122,12 +112,6 @@ Then modify `app.py` to import and call your game just like `run_pingpong`.
 -  Gesture recognition and input control
 -  Object-oriented design for reusable logic
 -  Refactoring and scalable code structuring
-
----
-
-##  Screenshots
-
-> Add screenshots of gameplay and gesture controls here to show off your project visually.
 
 ---
 
