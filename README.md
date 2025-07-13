@@ -11,6 +11,22 @@ HandMotion Studio is an interactive AR/VR desktop application built with Python 
 ---
 ##  Folder Structure
 
+
+---
+
+## Features
+
+- 🖐️ Real-time hand tracking using MediaPipe
+-  Gesture-based controls:
+  - **Pinch** to navigate menus and exit games
+  - **Grab/Open** to pick up and release objects
+-  **Ping Pong Game** with AI paddle and ball physics
+-  **Playground Mode** with draggable cube, basketball, and beer
+-  VirtualObject abstraction for easy object handling and future game expansions
+-  AI opponent paddle behavior in Ping Pong.
+
+---
+
 ```
 handmotion_studio/
 ├── assets/                  # Game assets (beer, basketball, cube, paddle images)
@@ -30,21 +46,6 @@ handmotion_studio/
 └── README.md                # Project documentation
 ```
 
----
-
-## Features
-
-- 🖐️ Real-time hand tracking using MediaPipe
--  Gesture-based controls:
-  - **Pinch** to navigate menus and exit games
-  - **Grab/Open** to pick up and release objects
--  **Ping Pong Game** with AI paddle and ball physics
--  **Playground Mode** with draggable cube, basketball, and beer
--  VirtualObject abstraction for easy object handling and future game expansions
--  Modular structure for easily adding more games like Air Hockey, etc.
--  AI opponent paddle behavior in Ping Pong
-
----
 
 ##  Technologies Used
 
